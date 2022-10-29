@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card mx-auto mt-5v text-center mt-5" style="width: 50rem;">
+    <div class="card-body">
+        {% if product.image.url %}
+        <img class="w-75 h-75" src="{{product.image.url}}" alt="Product-Photo">
+        {% else %}
+        <img class="w-75 h-75" src="static/product_image/no-photo.jpg" alt="No-Photo">
+        {% endif %}
+        <h5 class="card-title">Name: {{product.name}}</h5>
+        <p class="card-text">Description: {{product.description}}</p>
+        <p class="card-text">Category: {{product.category}}</p>
+    </div>
+</div>
+
+<section>
+    <div class="container my-5 py-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="card text-dark">
+                    <div class="card-body p-4">
+                        <h4 class="mb-0">Recent reviews</h4>
+                        <p class="fw-light mb-4 pb-2">Latest reviews by users</p>
+                        <div class="d-flex flex-start">
+                            {% for review in product.product.all %}
+                                <div>
+                                    <h6 class="fw-bold mb-1">{{review.author.username}}</h6>
+                                    <span class="badge bg-primary">Rating by user: {{review.rating}}</span>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                                        <a href="#!" class="link-muted"><i class="fas fa-redo-alt ms-2"></i></a>
+                                        <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                                    </div>
+                                    <p class="mb-0">
+                                        {{review.text}}
+                                    </p>
+                                </div>
+                            {% empty %}
+                                <h5>No reviews</h5>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

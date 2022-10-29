@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{% block title%}
+Products
+{% endblock %}
+{% block content %}
+<div class="row mt-5 text-center">
+    {% for product in products %}
+    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+        <div class="card text-black">
+            {% if not product.image %}
+                <img src="static/product_images/no-photo.jpg" class="card-img-top" alt="Image" />
+            {% else %}
+                <img src="{{product.image.url}}" class="card-img-top" alt="static/product_images/no-photo.jpg" />
+            {% endif %}
+            <div class="card-body">
+                <div class="text-center mt-1">
+                    <h4 class="card-title">{{product.name}}</h4>
+                    <h6 class="text-secondary mb-1 pb-3">Description: {{product.description}}$</h6>
+                    <h6 class="text-success mb-1 pb-3">Category: {{product.category}}</h6>
+                </div>
+                <div class="d-flex flex-row">
+                    <a href="{% url 'product_detail' product.pk %}" type="button" class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">
+                        Learn more
+                    </a>
+                    <a href="#" type="button" class="btn btn-danger flex-fill ms-1">Edit</a>
+                    <a href="#" type="button" class="btn btn-danger flex-fill ms-1">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+</div>
+{% endblock %}
