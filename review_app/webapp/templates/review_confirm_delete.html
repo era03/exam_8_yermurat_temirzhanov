@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="card mx-auto mt-5v text-center mt-5" style="width: 50rem;">
+    <div class="card-body">
+        <h1 class="card-title">Are you really want to delete?</h1>
+        <h5 class="card-title">User: {{review.author.username}}</h5>
+        <p class="card-text">Product: {{review.product.name}}</p>
+        <p class="card-text">Text: {{review.text}}</p>
+        <p class="card-text">Rating: {{review.rating}}</p>
+        <div class="text-center">
+            <form action="{% url 'review_confirm_delete' review.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes</button>
+                <a class="btn btn-primary" href="{% url 'index'%}">No</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
