@@ -11,6 +11,7 @@
         <h5 class="card-title">Name: {{product.name}}</h5>
         <p class="card-text">Description: {{product.description}}</p>
         <p class="card-text">Category: {{product.category}}</p>
+        <p class="card-text">Avarage rating: {{avarage.avg}}</p>
         <a href="{% url 'create_review' product.pk %}" class="btn btn-info">Add new review</a>
     </div>
 </div>
@@ -23,9 +24,9 @@
                         <h4 class="mb-0">Recent review</h4>
                         <p class="fw-light mb-4 pb-2">Latest Reviews section by users</p>
                         {% for review in product.product.all %}
-                        <div class="d-flex flex-start">
+                        <div class="d-flex flex-start pt-3 pb-3">
                             <div>
-                                <h6 class="fw-bold mb-1">User: {{review.author.username}} </h6>
+                                <h6 class="fw-bold mb-1">User: <a href="{% url 'user_detail' review.author.id %}">{{review.author.username}}</a> </h6>
                                 <h6 class="fw-bold mb-1">Email: {{review.author.email}} </h6>
                                 <div class="d-flex align-items-center mb-3">
                                     <p class="mb-0">
@@ -51,6 +52,7 @@
                                 </p>
                             </div>
                         </div>
+                        <hr class="" />
                         {% empty %}
                         <h5>No reviews</h5>
                         {% endfor %}
