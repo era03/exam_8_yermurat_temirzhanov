@@ -1,5 +1,5 @@
 from django import forms
-from webapp.models import Product
+from webapp.models import Product, Review
 from django.forms import ValidationError
 
 
@@ -23,3 +23,10 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('name', 'description', 'category', 'image')
+
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = ('text', 'rating')
