@@ -1,13 +1,16 @@
 from django.views.generic import DetailView, UpdateView
 from accounts.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse
 
 
+class UserChangePermissions(UserPassesTestMixin):
 
+    def test_func(self):
+        return self.get_object().username == self.request.user or self.request.user.is_superuser
 
-class UserDetailView(LoginRequiredMixin, DetailView):
+class UserDetailView(DetailView):
     model = get_user_model()
     template_name = 'user_detail.html'
     context_object_name = 'user_obj'
@@ -18,7 +21,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-class UserChangeView(UpdateView):
+class UserChangeView(UserChangePermissions, UpdateView):
     model = get_user_model()
     form_class = UserChangeForm
     template_name = 'user_change.html'
@@ -28,7 +31,7 @@ class UserChangeView(UpdateView):
         return reverse('index')
 
 
-class UserPasswordChangeView(UpdateView):
+class UserPasswordChangeView(UserChangePermissions, UpdateView):
     model = get_user_model()
     template_name = 'user_password_change.html'
     form_class = PasswordChangeForm

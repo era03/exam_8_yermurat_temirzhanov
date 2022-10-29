@@ -11,7 +11,7 @@
         <h5 class="card-title">Name: {{product.name}}</h5>
         <p class="card-text">Description: {{product.description}}</p>
         <p class="card-text">Category: {{product.category}}</p>
-        <p class="card-text">Avarage rating: {{avarage.avg}}</p>
+        <p class="card-text">Avarage rating: {{avarage.avg|default_if_none:0}}</p>
         <a href="{% url 'create_review' product.pk %}" class="btn btn-info">Add new review</a>
     </div>
 </div>
