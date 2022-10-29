@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="card mx-auto mt-5v text-center mt-5" style="width: 50rem;">
     <div class="card-body">
-        {% if product.image.url %}
-        <img class="w-75 h-75" src="{{product.image.url}}" alt="Product-Photo">
+        {% if not product.image %}
+            <img class="w-75 h-75" src="{% static 'product_images/no-photo.jpg' %}" alt="No-Photo">
         {% else %}
-        <img class="w-75 h-75" src="static/product_image/no-photo.jpg" alt="No-Photo">
+            <img class="w-75 h-75" src="{{product.image.url}}" alt="Product-Photo">
         {% endif %}
         <h5 class="card-title">Name: {{product.name}}</h5>
         <p class="card-text">Description: {{product.description}}</p>
