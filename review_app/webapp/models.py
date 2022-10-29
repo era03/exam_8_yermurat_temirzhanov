@@ -41,6 +41,9 @@ class Product(models.Model):
         verbose_name='Картинка товара'
     )
 
+    def __str__(self) -> str:
+        return f'{self.name}'
+
 
 class Review(models.Model):
     author = models.ForeignKey(
