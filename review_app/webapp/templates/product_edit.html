@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content%}
+<form action="{% url 'product_edit' product.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {% include 'partial/product_form.html' %}
+    </div>
+</form>
+{% endblock %}
