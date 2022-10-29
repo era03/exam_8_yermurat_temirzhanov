@@ -22,8 +22,8 @@ Products
                     <a href="{% url 'product_detail' product.pk %}" type="button" class="btn btn-primary flex-fill me-1" data-mdb-ripple-color="dark">
                         Learn more
                     </a>
-                    <a href="#" type="button" class="btn btn-danger flex-fill ms-1">Edit</a>
-                    <a href="#" type="button" class="btn btn-danger flex-fill ms-1">Delete</a>
+                    <a href="{% url 'product_edit' product.pk %}" type="button" class="btn btn-danger flex-fill ms-1">Edit</a>
+                    <a href="{% url 'product_delete' product.pk %}" type="button" class="btn btn-danger flex-fill ms-1">Delete</a>
                 </div>
             </div>
         </div>
