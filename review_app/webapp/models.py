@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -36,7 +37,7 @@ class Product(models.Model):
     image = models.ImageField(
         null=True, 
         blank=True, 
-        upload_to='product_images', 
+        upload_to='product_pics', 
         verbose_name='Картинка товара'
     )
 
@@ -44,14 +45,14 @@ class Product(models.Model):
 class Review(models.Model):
     author = models.ForeignKey(
         get_user_model(), 
-        related_name='author', 
+        related_name='authors', 
         on_delete=models.CASCADE, 
         verbose_name='Пользователь'
     )
     product = models.ForeignKey(
         to='Product',
         verbose_name='Продукт',
-        related_name='reviews',
+        related_name='product',
         on_delete=models.CASCADE
     )
     text = models.TextField(
